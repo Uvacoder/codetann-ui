@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import {
   HStack,
   IconButton,
@@ -12,9 +13,13 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/react";
-import { FaHamburger } from "react-icons/fa";
+import { FaHamburger, FaGoogle, FaFacebook, FaTwitter } from "react-icons/fa";
 
 export default function SimpleLogin() {
+  const history = useHistory();
+  const handleLogin = () => history.push("/dashboard");
+  const handleSignup = () => history.push("/signup");
+
   return (
     <VStack spacing="3rem" w="100%" maxW="lg">
       {/* Info Section */}
@@ -24,13 +29,15 @@ export default function SimpleLogin() {
           fontSize="1.5rem"
           icon={<FaHamburger />}
         />
-        <Heading size="xl">Dine</Heading>
+        <Heading size="xl">Food</Heading>
       </HStack>
       <VStack>
         <Heading>Login to your account</Heading>
-        <HStack>
-          <Text>Or</Text>
-          <Text color="purple.600">create an account</Text>
+        <HStack spacing=".4rem">
+          <Text>or</Text>
+          <Text color="purple.600" cursor="pointer" onClick={handleSignup}>
+            create an account
+          </Text>
         </HStack>
       </VStack>
 
@@ -48,16 +55,21 @@ export default function SimpleLogin() {
           <Input type="email" />
         </FormControl>
         <FormControl id="password">
-          <FormLabel>Email</FormLabel>
+          <FormLabel>Password</FormLabel>
           <Input type="password" />
         </FormControl>
-        <Button w="100%" colorScheme="purple">
+        <Button onClick={handleLogin} w="100%" colorScheme="purple">
           Sign In
         </Button>
         <HStack w="100%" spacing="2rem" justify="center">
           <Text fontWeight="500" color={"blackAlpha.700"}>
             or continue with
           </Text>
+        </HStack>
+        <HStack>
+          <IconButton color="#1877f2" icon={<FaFacebook />} />
+          <IconButton color="#ea4335" icon={<FaGoogle />} />
+          <IconButton color="#1da1f2" icon={<FaTwitter />} />
         </HStack>
       </VStack>
     </VStack>
